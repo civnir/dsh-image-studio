@@ -40,23 +40,32 @@ window.__ModuleLoader__.load({
     }
 
     /**
-     * Sidebar glyph: a photo frame with a mountain range, plus a solid four-point
-     * sparkle pinned to the top-right corner. The frame says "images", the sparkle
-     * says "generated", and the outline/solid split keeps both legible at 16px.
-     * Geometry follows the shipped panel icons: 16-unit box, 1.2 stroke, round caps.
+     * Sidebar glyph: the shipped sparkle icon, so this entry reads as one of the
+     * family rather than as a hand-drawn guest. The inline copy below is a pixel
+     * match of IconSparkleRegular, used only if the primitives module cannot be
+     * resolved at load time.
      */
-    const PanelIcon = ({ size }) => h('svg', {
-      width: size, height: size, viewBox: '0 0 16 16', 'aria-hidden': true,
-      fill: 'none', stroke: 'currentColor', strokeWidth: 1.2, strokeLinecap: 'round', strokeLinejoin: 'round',
-    },
-      h('rect', { x: 2.6, y: 4.4, width: 9, height: 8.6, rx: 1.4 }),
-      h('path', { d: 'M3.3 12.2 5.9 9.1 7.6 10.8 8.9 9.4 11.1 12.2' }),
-      h('path', {
-        fill: 'currentColor',
-        stroke: 'none',
-        d: 'M13.1 1.2c.2 1.1.85 1.75 1.95 1.95-1.1.2-1.75.85-1.95 1.95-.2-1.1-.85-1.75-1.95-1.95 1.1-.2 1.75-.85 1.95-1.95Z',
-      }),
-    );
+    let primitives = null;
+    try {
+      primitives = require('@deepseek-ai/dsh-client-ui-primitives');
+    } catch {
+      primitives = null;
+    }
+
+    const SPARKLE_PATHS = [
+      'M5.875 3C5.875 6.33333 7.54167 8 10.875 8C7.54167 8 5.875 9.66667 5.875 13C5.875 9.66667 4.20833 8 0.875 8C4.20833 8 5.875 6.33333 5.875 3Z',
+      'M12.375 1.55823C12.375 3.39156 13.2917 4.30823 15.125 4.30823C13.2917 4.30823 12.375 5.22489 12.375 7.05823C12.375 5.22489 11.4583 4.30823 9.625 4.30823C11.4583 4.30823 12.375 3.39156 12.375 1.55823Z',
+      'M12.375 10.4418C12.375 11.7751 13.0417 12.4418 14.375 12.4418C13.0417 12.4418 12.375 13.1084 12.375 14.4418C12.375 13.1084 11.7083 12.4418 10.375 12.4418C11.7083 12.4418 12.375 11.7751 12.375 10.4418Z',
+    ];
+
+    const PanelIcon = ({ size }) => {
+      const Sparkle = primitives?.IconSparkleRegular;
+      if (typeof Sparkle === 'function') return h(Sparkle, size === undefined ? {} : { size });
+      return h('svg', {
+        width: size, height: size, viewBox: '0 0 16 16', fill: 'none',
+        stroke: 'currentColor', strokeWidth: 1, 'aria-hidden': true,
+      }, SPARKLE_PATHS.map((d) => h('path', { key: d.slice(0, 10), d })));
+    };
 
     /**
      * Outlined field whose label rests inside the box and floats onto the border
