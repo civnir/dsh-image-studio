@@ -4,6 +4,22 @@
   "description": "Image generation studio panel for DeepSeek Harness, backed by SiliconFlow image models.",
   "license": "MIT",
   "author": "civnir",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/civnir/dsh-image-studio.git"
+  },
+  "homepage": "https://github.com/civnir/dsh-image-studio#readme",
+  "bugs": {
+    "url": "https://github.com/civnir/dsh-image-studio/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "plugin",
+    "image-generation",
+    "text-to-image",
+    "siliconflow"
+  ],
   "type": "module",
   "exports": {
     ".": "./index.js",
