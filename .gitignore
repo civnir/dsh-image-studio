@@ -1,0 +1,14 @@
+node_modules/
+*.log
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# runtime output that should never be committed
+index.json
+*.png
+*.jpg
+*.jpeg
+*.webp
+!docs/**

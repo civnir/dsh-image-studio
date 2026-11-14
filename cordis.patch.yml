@@ -1,0 +1,11 @@
+# Default composition for @civnir/dsh-image-studio.
+# Every key here is only a default: override it from your profile's cordis.patch.yml
+# (or the harness config editor) without touching the package.
+- insert:
+    - id: dsh-image-studio
+      name: '@civnir/dsh-image-studio'
+      config:
+        # Empty means "~/.dsh/image-studio".
+        outputDir: ''
+        defaultModel: 'OpenMOSS-Team/MOSS-Image'
+        maxCount: 4

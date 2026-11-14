@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Image Studio",
+    "description": "Sidebar image generation panel: pick a SiliconFlow image model, write a prompt, generate images and keep them locally."
+  }
+}
