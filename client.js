@@ -39,13 +39,23 @@ window.__ModuleLoader__.load({
       return (ms / 1000).toFixed(1) + 's';
     }
 
-    const BrushIcon = ({ size }) => h('svg', {
+    /**
+     * Sidebar glyph: a photo frame with a mountain range, plus a solid four-point
+     * sparkle pinned to the top-right corner. The frame says "images", the sparkle
+     * says "generated", and the outline/solid split keeps both legible at 16px.
+     * Geometry follows the shipped panel icons: 16-unit box, 1.2 stroke, round caps.
+     */
+    const PanelIcon = ({ size }) => h('svg', {
       width: size, height: size, viewBox: '0 0 16 16', 'aria-hidden': true,
       fill: 'none', stroke: 'currentColor', strokeWidth: 1.2, strokeLinecap: 'round', strokeLinejoin: 'round',
     },
-      h('path', { d: 'M3.2 12.8c1.1.2 2-.2 2.5-1.1.4-.8.2-1.6-.4-2.1-.7-.6-1.8-.5-2.4.3-.5.7-.5 1.7.3 2.9Z' }),
-      h('path', { d: 'M6.4 9.4 11.9 3.9a1.6 1.6 0 0 1 2.2 2.2L8.6 11.6' }),
-      h('path', { d: 'M4.4 12.2 6.4 9.4' }),
+      h('rect', { x: 2.6, y: 4.4, width: 9, height: 8.6, rx: 1.4 }),
+      h('path', { d: 'M3.3 12.2 5.9 9.1 7.6 10.8 8.9 9.4 11.1 12.2' }),
+      h('path', {
+        fill: 'currentColor',
+        stroke: 'none',
+        d: 'M13.1 1.2c.2 1.1.85 1.75 1.95 1.95-1.1.2-1.75.85-1.95 1.95-.2-1.1-.85-1.75-1.95-1.95 1.1-.2 1.75-.85 1.95-1.95Z',
+      }),
     );
 
     /**
@@ -801,7 +811,7 @@ window.__ModuleLoader__.load({
           order: 12,
           locale: NS,
           label: () => t('panel'),
-        }, BrushIcon));
+        }, PanelIcon));
 
         ctx.slots.inject('main', () => ctx.slots.register({
           name: 'main',
